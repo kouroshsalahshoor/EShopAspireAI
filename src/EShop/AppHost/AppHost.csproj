@@ -13,4 +13,8 @@
     <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.18.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CatalogAPI\CatalogAPI.csproj" />
+  </ItemGroup>
+
 </Project>
