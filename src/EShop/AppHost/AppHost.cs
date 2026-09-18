@@ -14,4 +14,6 @@ builder.AddProject<Projects.CatalogAPI>("catalogapi")
     .WithReference(catalogDb)
     .WaitFor(catalogDb);
 
+builder.AddProject<Projects.BasketAPI>("basketapi");
+
 builder.Build().Run();

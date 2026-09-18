@@ -5,6 +5,7 @@
   </Folder>
   <Folder Name="/Frontend/" />
   <Folder Name="/Services/">
+    <Project Path="BasketAPI/BasketAPI.csproj" />
     <Project Path="CatalogAPI/CatalogAPI.csproj" />
   </Folder>
 </Solution>
