@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BasketAPI\BasketAPI.csproj" />
+    <ProjectReference Include="..\CartAPI\CartAPI.csproj" />
     <ProjectReference Include="..\CatalogAPI\CatalogAPI.csproj" />
   </ItemGroup>
 

@@ -1,0 +1,64 @@
+@CartAPI_HostAddress = https://localhost:7083/cart/
+
+GET {{CartAPI_HostAddress}}xxx
+Accept: application/json
+
+###
+
+POST {{CartAPI_HostAddress}}
+Content-Type: application/json
+{
+    "UserName": "xxx",
+    "Items": [
+        {
+        "Quantity": 2,
+        "Color": "Red",
+        "Price": 0,
+        "ProductId": 1,
+        "ProductName": "Solar Powered Flashlight"
+        },
+        {
+        "Quantity": 1,
+        "Color": "Blue",
+        "Price": 0,
+        "ProductId": 2,
+        "ProductName": "Hiking Poles"
+        }
+    ]
+}
+
+###
+
+POST {{CartAPI_HostAddress}}
+Content-Type: application/json
+
+{
+    "UserName": "xxx",
+    "Items": [
+        {
+        "Quantity": 3,
+        "Color": "Red",
+        "Price": 0,
+        "ProductId": 1,
+        "ProductName": "Solar Powered Flashlight"
+        },
+        {
+        "Quantity": 4,
+        "Color": "Blue",
+        "Price": 0,
+        "ProductId": 2,
+        "ProductName": "Hiking Poles"
+        },
+        {
+        "Quantity": 5,
+        "Color": "Blue",
+        "Price": 0,
+        "ProductId": 9,
+        "ProductName": "Camping Tent"
+        }
+    ]
+}
+
+###
+DELETE {{CartAPI_HostAddress}}xxx
+Content-Type: application/json

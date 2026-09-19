@@ -1,4 +1,4 @@
-﻿namespace BasketAPI.Models;
+﻿namespace CartAPI.Models;
 
 public class Cart
 {

@@ -10,7 +10,13 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.AddRedisDistributedCache(connectionName: "cache");
-builder.Services.AddScoped<IBasketService, BasketService>();
+builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<ICatalogApiClient, CatalogApiClient>();
+
+builder.Services.AddHttpClient<ICatalogApiClient, CatalogApiClient>(client =>
+{
+    client.BaseAddress = new Uri("http+https://catalogapi");
+});
 
 var app = builder.Build();
 
@@ -27,6 +33,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapBasketEndpoints();
+app.MapCartEndpoints();
 
 app.Run();

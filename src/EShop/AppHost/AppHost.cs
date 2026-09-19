@@ -20,8 +20,10 @@ var catalogApi = builder.AddProject<Projects.CatalogAPI>("catalogapi")
     .WithReference(catalogDb)
     .WaitFor(catalogDb);
 
-var basketApi = builder.AddProject<Projects.BasketAPI>("basketapi")
+var cartApi = builder.AddProject<Projects.CartAPI>("cartapi")
     .WithReference(cache)
-    .WaitFor(cache);
+    .WithReference(catalogApi)
+    .WaitFor(cache)
+    .WaitFor(catalogApi);
 
 builder.Build().Run();

@@ -1,13 +1,13 @@
-﻿namespace BasketAPI.Endpoints;
+﻿namespace CartAPI.Endpoints;
 
-public static class BasketEndpoints
+public static class CartEndpoints
 {
-    public static void MapBasketEndpoints(this IEndpointRouteBuilder app)
+    public static void MapCartEndpoints(this IEndpointRouteBuilder app)
     {
-        var group = app.MapGroup("basket");
+        var group = app.MapGroup("cart");
 
         // GET by userName
-        group.MapGet("/{userName}", async (string userName, IBasketService service) =>
+        group.MapGet("/{userName}", async (string userName, ICartService service) =>
         {
             var shoppingCart = await service.Get(userName);
 
@@ -23,7 +23,7 @@ public static class BasketEndpoints
         .Produces(StatusCodes.Status404NotFound);
 
         // POST (Upsert)
-        group.MapPost("/", async (Cart shoppingCart, IBasketService service) =>
+        group.MapPost("/", async (Cart shoppingCart, ICartService service) =>
         {
             await service.Update(shoppingCart);
             return Results.Created("Get", shoppingCart);
@@ -32,7 +32,7 @@ public static class BasketEndpoints
         .Produces<Cart>(StatusCodes.Status201Created);
 
         // DELETE
-        group.MapDelete("/{userName}", async (string userName, IBasketService service) =>
+        group.MapDelete("/{userName}", async (string userName, ICartService service) =>
         {
             await service.Delete(userName);
             return Results.NoContent();
