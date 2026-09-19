@@ -15,15 +15,27 @@ var cache = builder
     .WithDataVolume()
     .WithLifetime(ContainerLifetime.Persistent);
 
-//////////// Projects ////////////////
-var catalogApi = builder.AddProject<Projects.CatalogAPI>("catalogapi")
-    .WithReference(catalogDb)
-    .WaitFor(catalogDb);
+var rabbitmq = builder
+    .AddRabbitMQ("rabbitmq")
+    .WithManagementPlugin()
+    .WithDataVolume()
+    .WithLifetime(ContainerLifetime.Persistent);
 
-var cartApi = builder.AddProject<Projects.CartAPI>("cartapi")
+//////////// Projects ////////////////
+var catalogApi = builder
+    .AddProject<Projects.CatalogAPI>("catalogapi")
+    .WithReference(catalogDb)
+    .WithReference(rabbitmq)
+    .WaitFor(catalogDb)
+    .WaitFor(rabbitmq);
+
+var cartApi = builder
+    .AddProject<Projects.CartAPI>("cartapi")
     .WithReference(cache)
     .WithReference(catalogApi)
+    .WithReference(rabbitmq)
     .WaitFor(cache)
-    .WaitFor(catalogApi);
+    .WaitFor(catalogApi)
+    .WaitFor(rabbitmq);
 
 builder.Build().Run();

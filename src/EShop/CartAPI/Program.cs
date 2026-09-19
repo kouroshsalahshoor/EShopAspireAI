@@ -11,7 +11,6 @@ builder.Services.AddSwaggerGen();
 
 builder.AddRedisDistributedCache(connectionName: "cache");
 builder.Services.AddScoped<ICartService, CartService>();
-builder.Services.AddScoped<ICatalogApiClient, CatalogApiClient>();
 
 builder.Services.AddHttpClient<ICatalogApiClient, CatalogApiClient>(client =>
 {
