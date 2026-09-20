@@ -21,6 +21,12 @@ var rabbitmq = builder
     .WithDataVolume()
     .WithLifetime(ContainerLifetime.Persistent);
 
+var keycloak = builder
+    .AddKeycloak("keycloak", 8080)
+    .WithDataVolume()
+    .WithLifetime(ContainerLifetime.Persistent);
+
+
 //////////// Projects ////////////////
 var catalogApi = builder
     .AddProject<Projects.CatalogAPI>("catalogapi")
@@ -34,8 +40,10 @@ var cartApi = builder
     .WithReference(cache)
     .WithReference(catalogApi)
     .WithReference(rabbitmq)
+    .WithReference(keycloak)
     .WaitFor(cache)
     .WaitFor(catalogApi)
-    .WaitFor(rabbitmq);
+    .WaitFor(rabbitmq)
+    .WaitFor(keycloak);
 
 builder.Build().Run();

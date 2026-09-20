@@ -1,12 +1,16 @@
 @CartAPI_HostAddress = https://localhost:7083/cart/
+@accessToken = eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJsYlozMThqTy0tYUtkVFVGdzA1MTZwRUpkWUM4LWVoZDBpQ1gxMHVNVnNZIn0.eyJleHAiOjE3ODk5MzYzNTgsImlhdCI6MTc4OTkzNjA1OCwianRpIjoib25ydHJvOjliYWFjZTM2LWRjMjAtMDJkOS0wNTA1LWVjNjY0MWNmOGI0NiIsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjYyNDM3L3JlYWxtcy9lc2hvcCIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiIxZGZlNjM5MS02MzA0LTRiZTAtOGRjZC03ZWE2ODBlZWI1ZjUiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJlc2hvcC1jbGllbnQiLCJzaWQiOiI0OWM2NWU3ZC1hNTEzLTUzNGMtNTcyNC05YzlkNTFjMWMxNTciLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIi8qIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiZGVmYXVsdC1yb2xlcy1lc2hvcCJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6ImFkbWluIGVzaG9wIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiZXNob3BhZG1pbiIsImdpdmVuX25hbWUiOiJhZG1pbiIsImZhbWlseV9uYW1lIjoiZXNob3AiLCJlbWFpbCI6ImFkbWluQGVzaG9wLmNvbSJ9.c0wOm4cs-ARXk_QAxflq5t7tEHtP4WSUjbqZ7cB_nTZWJOKv4v4PvTeZ88fkBaBtM-n-xRNiDP44Qa4gCdjAMdS8PE_V2-oxWD3zJFCIoy3IrUsMx-M6S6Z2NLzxuo1jekB6PYBhOBKjTpXYEOV6D85Ti1zdrOosQjrOWopjj8AkUx6kxQEtAhs19aF_pZkoMEpzl3dulV0ZWywG0MjgwriE3-Lwil-UomWWnx1xJXYaocSj0A39JDfmdhT56iHHE32uoUwvuCBdjTdm_kHSXKzfetXZh9Yz0ipihRfmquT3lVdT0ppEd6kW7_zn4mCENaTdjDwQrjR_JckRtFtjow
 
 GET {{CartAPI_HostAddress}}xxx
 Accept: application/json
+Authorization: Bearer {{accessToken}}
 
 ###
 
 POST {{CartAPI_HostAddress}}
 Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
 {
     "UserName": "xxx",
     "Items": [
@@ -31,6 +35,7 @@ Content-Type: application/json
 
 POST {{CartAPI_HostAddress}}
 Content-Type: application/json
+Authorization: Bearer {{accessToken}}
 
 {
     "UserName": "xxx",
@@ -62,3 +67,11 @@ Content-Type: application/json
 ###
 DELETE {{CartAPI_HostAddress}}xxx
 Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+###
+
+POST https://localhost:62437/realms/eshop/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=password&client_id=eshop-client&scope=email openid&username=eshopadmin&password=1

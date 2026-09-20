@@ -20,7 +20,8 @@ public static class CartEndpoints
         })
         .WithName("Get")
         .Produces<Cart>(StatusCodes.Status200OK)
-        .Produces(StatusCodes.Status404NotFound);
+        .Produces(StatusCodes.Status404NotFound)
+        .RequireAuthorization();
 
         // POST (Upsert)
         group.MapPost("/", async (Cart shoppingCart, ICartService service) =>
@@ -29,7 +30,8 @@ public static class CartEndpoints
             return Results.Created("Get", shoppingCart);
         })
         .WithName("Update")
-        .Produces<Cart>(StatusCodes.Status201Created);
+        .Produces<Cart>(StatusCodes.Status201Created)
+        .RequireAuthorization();
 
         // DELETE
         group.MapDelete("/{userName}", async (string userName, ICartService service) =>
@@ -38,6 +40,8 @@ public static class CartEndpoints
             return Results.NoContent();
         })
         .WithName("Delete")
-        .Produces(StatusCodes.Status204NoContent);
+        .Produces(StatusCodes.Status204NoContent)
+        .RequireAuthorization();
+
     }
 }
