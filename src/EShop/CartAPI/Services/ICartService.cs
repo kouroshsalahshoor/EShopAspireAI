@@ -5,4 +5,5 @@ public interface ICartService
     Task<Cart?> Get(string userName);
     Task Update(Cart cart);
     Task Delete(string userName);
+    Task UpdateCartItemProductPrices(int productId, decimal price);
 }

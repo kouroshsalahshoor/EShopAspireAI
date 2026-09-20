@@ -11,6 +11,7 @@ builder.Services.AddSwaggerGen();
 
 builder.AddNpgsqlDbContext<ApplicationDbContext>(connectionName: "catalogdb");
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddMassTransitWithAssemblies(Assembly.GetExecutingAssembly());
 
 var app = builder.Build();
 

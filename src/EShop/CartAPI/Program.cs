@@ -16,6 +16,7 @@ builder.Services.AddHttpClient<ICatalogApiClient, CatalogApiClient>(client =>
 {
     client.BaseAddress = new Uri("http+https://catalogapi");
 });
+builder.Services.AddMassTransitWithAssemblies(Assembly.GetExecutingAssembly());
 
 var app = builder.Build();
 
