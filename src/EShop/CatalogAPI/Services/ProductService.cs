@@ -3,7 +3,8 @@ using ServiceDefaults.Messaging.Events;
 
 namespace CatalogAPI.Services;
 
-public class ProductService(ApplicationDbContext db, IBus bus) : IProductService
+//public class ProductService(ApplicationDbContext db, IBus bus) : IProductService
+public class ProductService(ApplicationDbContext db) : IProductService
 {
     public async Task<IEnumerable<Product>> Get()
     {
@@ -27,16 +28,16 @@ public class ProductService(ApplicationDbContext db, IBus bus) : IProductService
         // if price has changed, raise ProductPriceChanged integration event
         if (model.Price != dto.Price)
         {
-            // Publish product price changed integration event for update basket prices
-            var integrationEvent = new ProductPriceChangedIntegrationEvent
-            {
-                ProductId = model.Id, // Id only comes from db entity
-                Name = dto.Name,
-                Description = dto.Description,
-                Price = dto.Price, //set updated product price
-                ImageUrl = dto.ImageUrl
-            };
-            await bus.Publish(integrationEvent);
+            //// Publish product price changed integration event for update basket prices
+            //var integrationEvent = new ProductPriceChangedIntegrationEvent
+            //{
+            //    ProductId = model.Id, // Id only comes from db entity
+            //    Name = dto.Name,
+            //    Description = dto.Description,
+            //    Price = dto.Price, //set updated product price
+            //    ImageUrl = dto.ImageUrl
+            //};
+            //await bus.Publish(integrationEvent);
         }
 
         // update product with new values

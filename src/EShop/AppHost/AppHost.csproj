@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BlazorServerApp\BlazorServerApp.csproj" />
     <ProjectReference Include="..\CartAPI\CartAPI.csproj" />
     <ProjectReference Include="..\CatalogAPI\CatalogAPI.csproj" />
   </ItemGroup>

@@ -9,6 +9,6 @@ public class ProductPriceChangedIntegrationEventHandler(ICartService service)
     public async Task Consume(ConsumeContext<ProductPriceChangedIntegrationEvent> context)
     {
         // find products on basket and update price
-        await service.UpdateCartItemProductPrices(context.Message.ProductId, context.Message.Price);
+        //await service.UpdateCartItemProductPrices(context.Message.ProductId, context.Message.Price);
     }
 }

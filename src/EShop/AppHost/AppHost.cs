@@ -1,13 +1,13 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
 //////////// Services ////////////////
-var postgres = builder
+var postGres = builder
         .AddPostgres("postgres")
         .WithPgAdmin()
         .WithDataVolume()
         .WithLifetime(ContainerLifetime.Persistent);
 
-var catalogDb = postgres.AddDatabase("catalogdb");
+var catalogDb = postGres.AddDatabase("catalogdb");
 
 var cache = builder
     .AddRedis("cache")
@@ -15,13 +15,13 @@ var cache = builder
     .WithDataVolume()
     .WithLifetime(ContainerLifetime.Persistent);
 
-var rabbitmq = builder
-    .AddRabbitMQ("rabbitmq")
-    .WithManagementPlugin()
-    .WithDataVolume()
-    .WithLifetime(ContainerLifetime.Persistent);
+//var rabbitMq = builder
+//    .AddRabbitMQ("rabbitmq")
+//    .WithManagementPlugin()
+//    .WithDataVolume()
+//    .WithLifetime(ContainerLifetime.Persistent);
 
-var keycloak = builder
+var keyCloak = builder
     .AddKeycloak("keycloak", 8080)
     .WithDataVolume()
     .WithLifetime(ContainerLifetime.Persistent);
@@ -31,19 +31,29 @@ var keycloak = builder
 var catalogApi = builder
     .AddProject<Projects.CatalogAPI>("catalogapi")
     .WithReference(catalogDb)
-    .WithReference(rabbitmq)
-    .WaitFor(catalogDb)
-    .WaitFor(rabbitmq);
+    //.WithReference(rabbitMq)
+    .WaitFor(catalogDb);
+    //.WaitFor(rabbitMq);
 
 var cartApi = builder
     .AddProject<Projects.CartAPI>("cartapi")
     .WithReference(cache)
     .WithReference(catalogApi)
-    .WithReference(rabbitmq)
-    .WithReference(keycloak)
+    //.WithReference(rabbitMq)
+    .WithReference(keyCloak)
     .WaitFor(cache)
     .WaitFor(catalogApi)
-    .WaitFor(rabbitmq)
-    .WaitFor(keycloak);
+    //.WaitFor(rabbitMq)
+    .WaitFor(keyCloak);
+
+var blazorServerApp = builder
+    .AddProject<Projects.BlazorServerApp>("blazorserverapp")
+    .WithExternalHttpEndpoints()
+    .WithReference(cache)
+    .WithReference(catalogApi)
+    .WithReference(cartApi)
+    .WaitFor(cache)
+    .WaitFor(catalogApi)
+    .WaitFor(cartApi);
 
 builder.Build().Run();

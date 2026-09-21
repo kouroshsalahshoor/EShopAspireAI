@@ -11,13 +11,13 @@ builder.Services.AddSwaggerGen();
 
 builder.AddRedisDistributedCache(connectionName: "cache");
 builder.Services.AddScoped<ICartService, CartService>();
-builder.Services.AddScoped<ICatalogApiClient, CatalogApiClient>();
+//builder.Services.AddScoped<ICatalogApiClient, CatalogApiClient>();
 
 builder.Services.AddHttpClient<ICatalogApiClient, CatalogApiClient>(client =>
 {
     client.BaseAddress = new Uri("http+https://catalogapi");
 });
-builder.Services.AddMassTransitWithAssemblies(Assembly.GetExecutingAssembly());
+//builder.Services.AddMassTransitWithAssemblies(Assembly.GetExecutingAssembly());
 
 builder.Services.AddAuthentication()
                 .AddKeycloakJwtBearer(

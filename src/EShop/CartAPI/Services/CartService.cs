@@ -27,19 +27,19 @@ public class CartService(IDistributedCache cache, ICatalogApiClient catalogApiCl
     {
         await cache.RemoveAsync(userName);
     }
-    public async Task UpdateCartItemProductPrices(int productId, decimal price)
-    {
-        // IDistributedCache not supported list of keys function
-        // https://github.com/dotnet/runtime/issues/36402
+    //public async Task UpdateCartItemProductPrices(int productId, decimal price)
+    //{
+    //    // IDistributedCache not supported list of keys function
+    //    // https://github.com/dotnet/runtime/issues/36402
 
-        // should be done for all users!!!
-        var cart = await Get("xxx");
+    //    // should be done for all users!!!
+    //    var cart = await Get("xxx");
 
-        var item = cart!.Items.FirstOrDefault(x => x.ProductId == productId);
-        if (item != null)
-        {
-            item.Price = price;
-            await cache.SetStringAsync(cart.UserName, JsonSerializer.Serialize(cart));
-        }
-    }
+    //    var item = cart!.Items.FirstOrDefault(x => x.ProductId == productId);
+    //    if (item != null)
+    //    {
+    //        item.Price = price;
+    //        await cache.SetStringAsync(cart.UserName, JsonSerializer.Serialize(cart));
+    //    }
+    //}
 }

@@ -3,7 +3,9 @@
     <Project Path="AppHost/AppHost.csproj" />
     <Project Path="ServiceDefaults/ServiceDefaults.csproj" />
   </Folder>
-  <Folder Name="/Frontend/" />
+  <Folder Name="/Frontend/">
+    <Project Path="BlazorServerApp/BlazorServerApp.csproj" />
+  </Folder>
   <Folder Name="/Services/">
     <Project Path="CartAPI/CartAPI.csproj" />
     <Project Path="CatalogAPI/CatalogAPI.csproj" />
