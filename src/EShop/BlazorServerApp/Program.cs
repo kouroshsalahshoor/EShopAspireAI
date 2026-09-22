@@ -14,6 +14,8 @@ builder.Services.AddHttpClient<ICatalogApiClient, CatalogApiClient>(client =>
     client.BaseAddress = new("https+http://catalogapi");
 });
 
+builder.AddRedisOutputCache("cache");
+
 var app = builder.Build();
 
 app.MapDefaultEndpoints();
@@ -33,5 +35,7 @@ app.UseAntiforgery();
 app.MapStaticAssets();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
+
+app.UseOutputCache();
 
 app.Run();
