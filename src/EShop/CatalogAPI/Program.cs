@@ -10,8 +10,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.AddNpgsqlDbContext<ApplicationDbContext>(connectionName: "catalogdb");
+
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IProductAIService, ProductAIService>();
+
 //builder.Services.AddMassTransitWithAssemblies(Assembly.GetExecutingAssembly());
+builder.AddOllamaApiClient("ollama-llama3-2").AddChatClient();
 
 var app = builder.Build();
 

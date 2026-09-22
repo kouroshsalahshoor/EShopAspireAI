@@ -1,11 +1,11 @@
-@CatalogAPI_HostAddress = https://localhost:7227/products/
+@CatalogAPI_HostAddress = https://localhost:7227/products
 
 GET {{CatalogAPI_HostAddress}}
 Accept: application/json
 
 ###
 
-GET {{CatalogAPI_HostAddress}}1
+GET {{CatalogAPI_HostAddress}}/1
 Accept: application/json
 
 ###
@@ -22,7 +22,7 @@ Content-Type: application/json
 
 ###
 
-PUT {{CatalogAPI_HostAddress}}10
+PUT {{CatalogAPI_HostAddress}}/10
 Content-Type: application/json
 {    
     "name": "UPDATED Swn Flashlight",
@@ -33,7 +33,7 @@ Content-Type: application/json
 
 ### update price
 
-PUT {{CatalogAPI_HostAddress}}1
+PUT {{CatalogAPI_HostAddress}}/1
 Content-Type: application/json
 {    
     "name": "Solar Powered Flashlight",
@@ -44,17 +44,18 @@ Content-Type: application/json
 
 ###
 
-DELETE {{CatalogAPI_HostAddress}}10
+DELETE {{CatalogAPI_HostAddress}}/10
 Content-Type: application/json
 
-### Support AI
-
-GET {{CatalogAPI_HostAddress}}/support/give-me-1-outdoor-activity
-Accept: application/json
 
 ### Traditional Search
 
 GET {{CatalogAPI_HostAddress}}/search/Hiking
+Accept: application/json
+
+### Support AI
+
+GET {{CatalogAPI_HostAddress}}/support/give-me-1-outdoor-activity
 Accept: application/json
 
 ### AI Search

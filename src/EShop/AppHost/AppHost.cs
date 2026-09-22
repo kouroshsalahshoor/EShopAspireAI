@@ -26,14 +26,23 @@ var keyCloak = builder
     .WithDataVolume()
     .WithLifetime(ContainerLifetime.Persistent);
 
+var ollama = builder
+    .AddOllama("ollama", 11434)
+    .WithDataVolume()
+    .WithLifetime(ContainerLifetime.Persistent)
+    .WithOpenWebUI();
+
+var llama = ollama.AddModel("llama3.2");
 
 //////////// Projects ////////////////
 var catalogApi = builder
     .AddProject<Projects.CatalogAPI>("catalogapi")
     .WithReference(catalogDb)
+    .WithReference(llama)
     //.WithReference(rabbitMq)
-    .WaitFor(catalogDb);
-    //.WaitFor(rabbitMq);
+    .WaitFor(catalogDb)
+    //.WaitFor(rabbitMq)
+    .WaitFor(llama);
 
 var cartApi = builder
     .AddProject<Projects.CartAPI>("cartapi")
